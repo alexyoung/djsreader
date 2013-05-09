@@ -1,4 +1,20 @@
-<h1>{{ feed.title }}</h1>
-<ul>
-  <li ng-repeat="item in feed.items">{{item.title}}</li>
-</ul>
+<p>Refresh (seconds): <input ng-model="refreshInterval"></p>
+
+<h3>Add Another Feed</h3>
+
+<div>
+  URL: <input size="80" ng-model="newFeed.url">
+  <button ng-click="addFeed(newFeed)">Add Feed</button>
+</div>
+
+<hr/>
+
+<div ng-repeat="feed in feeds">
+  <ul>
+    <li ng-repeat="item in feed.items"><a href="{{ item.link.href }}">{{ item.title }}</a></li>
+  </ul>
+  URL: <input size="80" ng-model="feed.url">
+  <button ng-click="fetchFeed(feed)">Update</button>
+  <button ng-click="deleteFeed(feed)">Delete</button>
+  <hr />
+</div>
