@@ -15,12 +15,12 @@ angular.module('djsreaderApp')
       apiUrl += "'%20and%20itemPath%3D'feed.entry'&format=json&diagnostics=true&callback=JSON_CALLBACK";
 
       $http.jsonp(apiUrl).
-        success(function(data, status, headers, config) {
+        success(function(data) {
           if (data.query.results) {
             feed.items = data.query.results.entry;
           }
         }).
-        error(function(data, status, headers, config) {
+        error(function(data) {
           console.error('Error fetching feed:', data);
         });
 
