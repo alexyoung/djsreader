@@ -139,6 +139,12 @@ module.exports = function (grunt) {
         options: {
           debugInfo: true
         }
+      },
+      bootstrap: {
+        options: {
+          sassDir: '<%= yeoman.app %>/components/sass-bootstrap/lib',
+          cssDir: '.tmp/styles'
+        }
       }
     },
     concat: {
@@ -265,6 +271,7 @@ module.exports = function (grunt) {
     'clean:server',
     'coffee:dist',
     'compass:server',
+    'compass:bootstrap',
     'livereload-start',
     'connect:livereload',
     'open',
@@ -284,6 +291,7 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'coffee',
+    'compass:bootstrap',
     'compass:dist',
     'useminPrepare',
     'imagemin',
