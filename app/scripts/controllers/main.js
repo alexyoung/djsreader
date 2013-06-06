@@ -28,9 +28,13 @@ angular.module('djsreaderApp')
     };
 
     $scope.addFeed = function(feed) {
-      $scope.feeds.push(feed);
-      $scope.fetchFeed(feed);
-      $scope.newFeed = {};
+      if (feed.$valid) {
+        // Copy this feed instance and reset the URL in the form
+        var newFeed = angular.copy(feed);
+        $scope.feeds.push(newFeed);
+        $scope.fetchFeed(newFeed);
+        $scope.newFeed.url = '';
+      }
     };
 
     $scope.deleteFeed = function(feed) {

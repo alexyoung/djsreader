@@ -2,10 +2,12 @@
 
 <h3>Add Another Feed</h3>
 
-<div>
-  URL: <input size="80" ng-model="newFeed.url">
-  <button ng-click="addFeed(newFeed)">Add Feed</button>
-</div>
+<form name="newFeed" novalidate>
+  URL: <input size="80" name="url" ng-model="newFeed.url" type="url" required>
+  <button ng-disabled="!newFeed.$valid" ng-click="addFeed(newFeed)">Add Feed</button>
+  <span class="error" ng-show="newFeed.$error.required">Required!</span>
+  <span class="error" ng-show="newFeed.$error.url">Invalid URL format!</span>
+</form>
 
 <hr/>
 
