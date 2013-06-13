@@ -1,11 +1,35 @@
 'use strict';
 
 angular.module('djsreaderApp')
-  .controller('MainCtrl', function($scope, $http, $timeout) {
+  .controller('MainCtrl', function($scope, $http, $timeout, $filter) {
+    function storyInCollection(story) {
+      for (var i = 0; i < $scope.stories.length; i++) {
+        if ($scope.stories[i].id === story.id) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function addStories(stories) {
+      var changed = false;
+      angular.forEach(stories, function(story, key) {
+        if (!storyInCollection(story)) {
+          $scope.stories.push(story);
+          changed = true;
+        }
+      });
+
+      if (changed) {
+        $scope.stories = $filter('orderBy')($scope.stories, 'date');
+      }
+    }
+
     $scope.refreshInterval = 60;
     $scope.feeds = [{
       url: 'http://dailyjs.com/atom.xml'
     }];
+    $scope.stories = [];
 
     $scope.fetchFeed = function(feed) {
       feed.items = [];
@@ -19,6 +43,7 @@ angular.module('djsreaderApp')
           if (data.query.results) {
             feed.items = data.query.results.entry;
           }
+          addStories(feed.items);
         }).
         error(function(data) {
           console.error('Error fetching feed:', data);

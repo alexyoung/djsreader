@@ -1,4 +1,14 @@
+<h1>djsreader</h1>
+
 <p>Refresh (seconds): <input ng-model="refreshInterval"></p>
+
+<h2>All Stories</h2>
+
+<ul>
+  <li ng-repeat="item in stories"><a href="{{ item.link.href }}">{{ item.title }}</a></li>
+</ul>
+
+<hr />
 
 <h3>Add Another Feed</h3>
 
