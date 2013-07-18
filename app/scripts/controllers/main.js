@@ -13,7 +13,7 @@ angular.module('djsreaderApp')
 
     function addStories(stories) {
       var changed = false;
-      angular.forEach(stories, function(story, key) {
+      angular.forEach(stories, function(story) {
         if (!storyInCollection(story)) {
           $scope.stories.push(story);
           changed = true;
